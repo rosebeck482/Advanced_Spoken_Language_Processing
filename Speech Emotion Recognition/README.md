@@ -28,8 +28,8 @@ scipy
 
 ## File Structure
 ```
-HW3/
-├── feature_extraction.ipynb       # Task 1: Feature Analysis - extracts and visualizes 6 pitch/intensity features
+Speech Emotion Recognition/
+├── feature_extraction.ipynb       # Task 1: Feature Analysis - extracts and visualizes 12 pitch/intensity features
 ├── classification.ipynb           # Task 2: Classification Experiments - OpenSMILE features and SVM classification
 ├── data/                         # Dataset directory
 │   ├── train.csv                 # Training dataset
@@ -69,7 +69,7 @@ This notebook performs **acoustic feature extraction and analysis** on emotional
 - Uses only **left channel (channel 1)** for analysis as specified
 
 ### Feature Extraction
-The notebook extracts **six acoustic features** from each speech segment:
+The notebook extracts **twelve acoustic features** from each speech segment (6 raw + 6 normalized):
 
 #### Pitch Features
 - **Minimum pitch** (Hz)
@@ -97,8 +97,8 @@ Implements **Z-score normalization** per speaker to account for individual vocal
 - Stores speaker-level statistics for normalization
 - Generates both **raw and normalized feature sets**
 
-### Visualization & Analysis
-- Creates **12 plots total**: 6 features × 2 conditions (raw vs normalized)
+### Visualization & Analysis  
+- Creates **12 plots total**: 6 base features × 2 conditions (raw vs normalized)
 - **Bar plots with error bars** showing emotion-level means and standard deviations
 - **X-axis**: 15 emotion classes, **Y-axis**: feature values
 - Compares patterns before and after speaker normalization
@@ -130,8 +130,8 @@ Speech emotion recognition system classifying **15 different emotional states** 
 
 ### Feature Engineering
 
-#### 1. OpenSMILE Feature Extraction
-- Uses `IS09_emotion.conf` to extract **384+ emotional features** from INTERSPEECH 2009 Emotion Challenge
+#### 1. OpenSMILE Feature Extraction  
+- Uses `IS09_emotion.conf` to extract **382 acoustic features** from INTERSPEECH 2009 Emotion Challenge
 - Saves per-file CSVs, then merges into: `/content/extracted/is09_all_speakers.csv`
    
 #### 2. Data Preprocessing
@@ -152,16 +152,16 @@ Speech emotion recognition system classifying **15 different emotional states** 
 - **Evaluation**: sklearn classification reports for each speaker + aggregated metrics
 
 ### Performance Results
-- **Overall aggregated accuracy**: 26.1%
-- **Overall weighted F1-score**: 25.7% 
-- **Best performing speaker (mm)**: 30.5% accuracy, 30.3% F1-score
+- **Overall aggregated accuracy**: ~26.1% (computed via leave-one-speaker-out CV)
+- **Overall weighted F1-score**: ~25.7% (computed via leave-one-speaker-out CV)  
+- **Best performing speaker**: Variable per experiment
 - **Strong performance** on high-arousal emotions: hot anger (F1=0.621), happy (F1=0.429)
 - **Challenges** with acoustically similar emotions (elation/happy confusion, disgust/contempt overlap)
 
 ### Error Analysis Findings
 - **Hot anger, happy, and anxiety** achieved highest classification success due to distinctive acoustic signatures
 - **Elation, disgust, and despair** proved most challenging due to acoustic similarity with other emotions
-- **Class imbalance issues** particularly affected neutral emotion classification (only 9 samples for speaker mm)
+- **Class imbalance issues** particularly affect low-frequency emotion classes across speakers
 - **Confusion patterns** show difficulty distinguishing between emotions with similar arousal levels
 
 ### Model Justification

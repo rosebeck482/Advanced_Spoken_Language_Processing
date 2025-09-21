@@ -31,7 +31,7 @@ scipy
 ## Directory Structure
 
 ```
-HW2/
+Dialogue Act Recognition/
 ├── data/
 │   ├── train.csv
 │   ├── valid.csv
@@ -93,11 +93,11 @@ Each utterance includes dialogue ID, speaker information, transcript text, dialo
 - `sv`: Statement-opinion  
 - `x`: Non-verbal sounds (silence, laughter, etc.)
 
-### 1. Text-Based Features (3,850 dimensions)
+### 1. Text-Based Features (3,841 dimensions)
 
 #### Feature Set Components:
 - **LIWC features**: 69 pre-existing psycholinguistic features (pronouns, emotions, temporal references)
-- **Basic metrics**: `word_count`, `character_count`, punctuation presence (`has_question_mark`, `has_exclamation_mark`)
+- **Basic metrics**: 4 features - `word_count`, `character_count`, punctuation presence (`has_question_mark`, `has_exclamation_mark`)
 - **Sentence embeddings**: 768-dimensional vectors using `sentence-transformers/all-mpnet-base-v2`
 - **TF-IDF n-grams**: 3,000 features (1-3 grams) capturing lexical patterns
 
@@ -230,8 +230,8 @@ This section describes the comprehensive multi-modal machine learning approach i
 - Training: 25 epochs with early stopping
 
 **Performance**:
-- Macro F1 score: ~0.27 (27%)
-- Accuracy: 0.6715
+- Macro F1 score: ~27% (computed via leave-one-out evaluation)
+- Accuracy: ~67% (varies by experiment)
 
 #### 2. Model 2: Text-Only Classifier (Stacked Ensemble)
 **Architecture**:
@@ -245,8 +245,8 @@ This section describes the comprehensive multi-modal machine learning approach i
 - Final prediction: Class with highest combined probability
 
 **Performance**:
-- Macro F1 score: ~0.68 (68%)
-- Accuracy: 0.86
+- Macro F1 score: ~68% (best performing model)
+- Accuracy: ~86% (varies by experiment)
 
 #### 3. Model 3: Multi-Modal Stacking Classifier
 **Architecture**:
@@ -255,7 +255,7 @@ This section describes the comprehensive multi-modal machine learning approach i
 - **Training strategy**: 5-fold cross-validation for unbiased out-of-fold predictions to prevent overfitting
 
 **Performance**:
-- Macro F1 score: ~0.67 (67%)
+- Macro F1 score: ~67% (competitive multimodal performance)
 - Demonstrates model diversity through stacking approach
 
 ### Evaluation & Analysis

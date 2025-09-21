@@ -38,7 +38,7 @@ pip install praat-parselmouth==0.4.5
 ## File Structure
 
 ```
-HW1/
+Speech Feature Extraction/
 ├── features_extract.py          # main extraction script
 ├── requirements.txt             # python dependencies
 ├── recordings/
